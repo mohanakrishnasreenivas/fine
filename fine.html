@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mohana Krishna S — UI/UX Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root{--ink:#0e0e0e;--paper:#f5f2ed;--accent:#1a3cff;--accent2:#ff4d1c;--muted:#7a7670;--border:rgba(14,14,14,0.12);--card:#fff;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.6;overflow-x:hidden;}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(245,242,237,0.92);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);}
+  .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.5px;}
+  .nav-links{display:flex;gap:28px;list-style:none;}
+  .nav-links a{font-size:13px;text-decoration:none;color:var(--muted);font-weight:500;letter-spacing:0.04em;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{font-size:13px;font-weight:500;padding:9px 22px;background:var(--ink);color:var(--paper);border-radius:100px;text-decoration:none;transition:background 0.2s,transform 0.15s;}
+  .nav-cta:hover{background:var(--accent);transform:scale(1.03);}
+
+  .hero{min-height:100vh;display:flex;align-items:center;padding:120px 48px 80px;position:relative;overflow:hidden;}
+  .hero-bg-num{position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:'Syne',sans-serif;font-size:clamp(180px,22vw,340px);font-weight:800;color:rgba(14,14,14,0.04);line-height:1;pointer-events:none;user-select:none;}
+  .hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:28px;}
+  .hero-tag::before{content:'';width:24px;height:2px;background:var(--accent);display:block;}
+  h1{font-family:'Syne',sans-serif;font-size:clamp(52px,7vw,96px);font-weight:800;line-height:0.95;letter-spacing:-3px;margin-bottom:32px;}
+  .h1-acc{color:var(--accent);}.h1-str{-webkit-text-stroke:2px var(--ink);color:transparent;}
+  .hero-desc{font-size:18px;color:var(--muted);max-width:480px;line-height:1.7;margin-bottom:48px;font-weight:300;}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn-p{padding:14px 32px;background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;border-radius:100px;text-decoration:none;border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;display:inline-block;}
+  .btn-p:hover{background:var(--accent);transform:translateY(-2px);}
+  .btn-o{padding:13px 32px;border:1.5px solid var(--ink);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;border-radius:100px;text-decoration:none;background:transparent;transition:background 0.2s,color 0.2s;display:inline-block;}
+  .btn-o:hover{background:var(--ink);color:var(--paper);}
+  .hero-stats{display:flex;gap:48px;margin-top:72px;padding-top:40px;border-top:0.5px solid var(--border);}
+  .stat-num{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;line-height:1;}
+  .stat-lbl{font-size:12px;color:var(--muted);margin-top:4px;}
+
+  section{padding:100px 48px;}
+  .sec-hdr{display:flex;align-items:baseline;gap:20px;margin-bottom:64px;}
+  .sec-num{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--accent);letter-spacing:0.08em;}
+  .sec-ttl{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,52px);font-weight:700;letter-spacing:-1.5px;}
+  .sec-line{flex:1;height:1px;background:var(--border);margin-left:12px;}
+
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+  .about-txt{font-size:17px;line-height:1.8;color:#3a3835;font-weight:300;}
+  .about-txt p+p{margin-top:20px;}
+  .sk-lbl{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+  .sk-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+  .chip{font-size:13px;padding:6px 16px;border:1px solid var(--border);border-radius:100px;color:var(--ink);background:var(--card);font-weight:400;}
+  .chip.a{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+  .exp-item{display:grid;grid-template-columns:160px 1fr;gap:32px;padding:40px 0;border-bottom:0.5px solid var(--border);}
+  .exp-date{font-size:13px;color:var(--muted);padding-top:4px;}
+  .exp-role{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:4px;}
+  .exp-co{font-size:14px;color:var(--accent);font-weight:500;margin-bottom:16px;}
+  .exp-ul{list-style:none;}
+  .exp-ul li{font-size:15px;color:#4a4845;line-height:1.7;padding-left:16px;position:relative;margin-bottom:6px;}
+  .exp-ul li::before{content:'—';position:absolute;left:0;color:var(--accent2);}
+  .cs-btn{display:inline-flex;align-items:center;gap:6px;margin-top:20px;padding:10px 20px;border:1.5px solid var(--accent);color:var(--accent);border-radius:100px;font-size:13px;font-weight:500;cursor:pointer;background:transparent;transition:background 0.2s,color 0.2s;}
+  .cs-btn:hover{background:var(--accent);color:#fff;}
+
+  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .proj-card{background:var(--card);border:0.5px solid var(--border);border-radius:20px;overflow:hidden;transition:transform 0.25s,box-shadow 0.25s;text-decoration:none;color:inherit;display:block;cursor:pointer;}
+  .proj-card:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(14,14,14,0.1);}
+  .proj-thumb{height:220px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:64px;font-weight:800;letter-spacing:-2px;}
+  .pt1{background:#e8f0ff;color:#1a3cff;}.pt2{background:#fff0ec;color:#ff4d1c;}.pt3{background:#e8f5e9;color:#1b5e20;}.pt4{background:#f3e5f5;color:#6a1b9a;}
+  .proj-body{padding:28px 28px 32px;}
+  .proj-ttl{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:10px;}
+  .proj-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px;}
+  .proj-footer{display:flex;align-items:center;justify-content:space-between;margin-top:4px;}
+  .proj-tags{display:flex;gap:8px;flex-wrap:wrap;}
+  .ptag{font-size:11px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:4px 12px;border-radius:100px;}
+  .pb{background:#e8f0ff;color:#1a3cff;}.pr{background:#fff0ec;color:#ff4d1c;}.pg{background:#e8f5e9;color:#1b5e20;}.pp{background:#f3e5f5;color:#6a1b9a;}
+  .proj-link{font-size:12px;font-weight:500;color:var(--accent);white-space:nowrap;}
+
+  .cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+  .cert-card{background:var(--card);border:0.5px solid var(--border);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;transition:transform 0.22s,box-shadow 0.22s,border-color 0.22s;}
+  .cert-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(14,14,14,0.1);border-color:var(--accent);}
+  .cert-card:hover .cert-nm{color:var(--accent);}
+  .cert-card:hover .cert-view{opacity:1;}
+  .cert-ico{font-size:28px;}
+  .cert-nm{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;transition:color 0.2s;}
+  .cert-iss{font-size:13px;color:var(--muted);}
+  .cert-view{font-size:12px;color:var(--accent);font-weight:500;opacity:0;transition:opacity 0.2s;}
+
+  .contact-wrap{background:var(--ink);border-radius:28px;padding:72px 80px;color:var(--paper);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+  .ct-title{font-family:'Syne',sans-serif;font-size:clamp(34px,4vw,54px);font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:20px;}
+  .ct-sub{font-size:15px;color:rgba(245,242,237,0.5);margin-bottom:40px;font-weight:300;line-height:1.7;}
+  .ct-info{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px;}
+  .ct-icon{width:42px;height:42px;border-radius:12px;border:1px solid rgba(245,242,237,0.15);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+  .ct-lbl{font-size:11px;color:rgba(245,242,237,0.38);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;}
+  .ct-val{font-size:14px;color:var(--paper);}
+  .ct-val a{color:var(--paper);text-decoration:none;}
+  .ct-val a:hover{opacity:0.7;}
+  .ct-social{display:flex;gap:10px;margin-top:36px;flex-wrap:wrap;}
+  .soc-btn{padding:9px 18px;border:1px solid rgba(245,242,237,0.2);border-radius:100px;color:var(--paper);text-decoration:none;font-size:13px;font-weight:500;transition:background 0.2s,border-color 0.2s;}
+  .soc-btn:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.35);}
+
+  .form{display:flex;flex-direction:column;gap:14px;}
+  .fg{display:flex;flex-direction:column;gap:6px;}
+  .fl{font-size:11px;color:rgba(245,242,237,0.42);letter-spacing:0.06em;text-transform:uppercase;}
+  .fi,.ft{background:rgba(255,255,255,0.07);border:1px solid rgba(245,242,237,0.14);border-radius:12px;padding:13px 16px;color:var(--paper);font-family:'DM Sans',sans-serif;font-size:15px;outline:none;transition:border-color 0.2s,background 0.2s;width:100%;}
+  .fi::placeholder,.ft::placeholder{color:rgba(245,242,237,0.22);}
+  .fi:focus,.ft:focus{border-color:rgba(245,242,237,0.38);background:rgba(255,255,255,0.1);}
+  .ft{resize:vertical;min-height:128px;}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .fsub{padding:15px 30px;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;border-radius:100px;border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;align-self:flex-start;margin-top:4px;display:flex;align-items:center;gap:8px;}
+  .fsub:hover{background:#e0ddd8;transform:translateY(-2px);}
+  .fsub:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+  .fok{display:none;margin-top:4px;padding:14px 18px;background:rgba(26,158,117,0.18);border:1px solid rgba(26,158,117,0.28);border-radius:12px;color:#5DCAA5;font-size:14px;}
+  .ferr{display:none;margin-top:4px;padding:14px 18px;background:rgba(226,75,74,0.15);border:1px solid rgba(226,75,74,0.25);border-radius:12px;color:#F09595;font-size:14px;}
+
+  /* CASE STUDY MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(14,14,14,0.7);z-index:1000;overflow-y:auto;padding:40px 20px;}
+  .modal-overlay.open{display:flex;align-items:flex-start;justify-content:center;}
+  .modal{background:var(--card);border-radius:24px;max-width:760px;width:100%;position:relative;overflow:hidden;}
+  .modal-hero{height:220px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:72px;font-weight:800;letter-spacing:-3px;}
+  .modal-body{padding:40px 48px 48px;}
+  .modal-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;background:rgba(14,14,14,0.12);border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background 0.2s;}
+  .modal-close:hover{background:rgba(14,14,14,0.22);}
+  .modal-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .modal-ttl{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;letter-spacing:-1px;margin-bottom:16px;line-height:1.1;}
+  .modal-sub{font-size:16px;color:var(--muted);margin-bottom:32px;line-height:1.7;}
+  .cs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:32px;}
+  .cs-stat{background:#f5f2ed;border-radius:12px;padding:16px 20px;}
+  .cs-stat-n{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--accent);}
+  .cs-stat-l{font-size:12px;color:var(--muted);margin-top:2px;}
+  .cs-section{margin-bottom:28px;}
+  .cs-section h4{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  .cs-section h4::before{content:'';width:16px;height:3px;background:var(--accent);border-radius:2px;display:block;}
+  .cs-section p{font-size:15px;color:#3a3835;line-height:1.8;}
+  .cs-section ul{list-style:none;margin-top:8px;}
+  .cs-section ul li{font-size:15px;color:#3a3835;line-height:1.7;padding-left:16px;position:relative;margin-bottom:6px;}
+  .cs-section ul li::before{content:'→';position:absolute;left:0;color:var(--accent2);font-size:13px;}
+  .cs-actions{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;}
+  .cs-action-btn{padding:12px 24px;background:var(--ink);color:var(--paper);border-radius:100px;text-decoration:none;font-size:14px;font-weight:500;transition:background 0.2s;}
+  .cs-action-btn:hover{background:var(--accent);}
+  .cs-action-sec{padding:11px 24px;border:1.5px solid var(--ink);color:var(--ink);border-radius:100px;text-decoration:none;font-size:14px;font-weight:500;cursor:pointer;background:transparent;transition:background 0.2s,color 0.2s;}
+  .cs-action-sec:hover{background:var(--ink);color:var(--paper);}
+
+  .fade-in{opacity:0;transform:translateY(24px);animation:fadeUp 0.7s ease forwards;}
+  @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+  .fade-in:nth-child(1){animation-delay:0.1s;}.fade-in:nth-child(2){animation-delay:0.2s;}.fade-in:nth-child(3){animation-delay:0.3s;}.fade-in:nth-child(4){animation-delay:0.4s;}.fade-in:nth-child(5){animation-delay:0.5s;}
+
+  footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:center;border-top:0.5px solid var(--border);font-size:13px;color:var(--muted);}
+
+  @media(max-width:768px){
+    nav{padding:16px 24px;}.nav-links{display:none;}
+    .hero{padding:100px 24px 60px;}section{padding:64px 24px;}
+    .about-grid,.proj-grid,.contact-grid,.frow,.cs-grid{grid-template-columns:1fr;gap:32px;}
+    .exp-item{grid-template-columns:1fr;gap:8px;}
+    .hero-stats{gap:28px;}
+    .contact-wrap{padding:40px 24px;border-radius:20px;}
+    .modal-body{padding:28px 24px 36px;}
+    footer{flex-direction:column;gap:8px;text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">MK</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire me</a>
+</nav>
+
+<!-- HOME -->
+<section class="hero" id="home">
+  <div class="hero-bg-num">UX</div>
+  <div class="hero-content">
+    <div class="hero-tag fade-in">UI/UX &amp; Product Designer</div>
+    <h1 class="fade-in"><span class="h1-str">Mohana</span><br><span class="h1-acc">Krishna</span>.S</h1>
+    <p class="hero-desc fade-in">I design intuitive, user-centered digital products — from research and wireframes to high-fidelity prototypes that developers can build.</p>
+    <div class="hero-actions fade-in">
+      <a href="#projects" class="btn-p">View my work</a>
+      <a href="#contact" class="btn-o">Get in touch</a>
+    </div>
+    <div class="hero-stats fade-in">
+      <div><div class="stat-num">2+</div><div class="stat-lbl">Projects shipped</div></div>
+      <div><div class="stat-num">5</div><div class="stat-lbl">Certifications</div></div>
+      <div><div class="stat-num">3</div><div class="stat-lbl">Design tools</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background:var(--card);">
+  <div class="sec-hdr"><span class="sec-num">01</span><h2 class="sec-ttl">About me</h2><div class="sec-line"></div></div>
+  <div class="about-grid">
+    <div class="about-txt">
+      <p>I'm a UI/UX Designer based in Tirupati, Andhra Pradesh, currently pursuing my B.Tech in Computer Science Engineering at SVCE. My design work lives at the intersection of empathy, logic, and visual clarity.</p>
+      <p>During my internship at NARL, I designed the UI for a risk and fraud detection dashboard — learning how to translate complex data into interfaces that real people can use under pressure.</p>
+      <p>I believe great design is invisible. When a user reaches their goal without friction, the designer did their job. That's what I build toward.</p>
+    </div>
+    <div>
+      <div class="sk-lbl">Design skills</div>
+      <div class="sk-chips"><span class="chip a">User Research</span><span class="chip a">Wireframing</span><span class="chip a">Prototyping</span><span class="chip">Usability Testing</span><span class="chip">Information Architecture</span><span class="chip">User Flows</span><span class="chip">Responsive Design</span><span class="chip">Design Systems</span></div>
+      <div class="sk-lbl">Tools</div>
+      <div class="sk-chips"><span class="chip a">Figma</span><span class="chip">Adobe XD</span><span class="chip">Miro</span><span class="chip">FigJam</span></div>
+      <div class="sk-lbl">Currently learning</div>
+      <div class="sk-chips"><span class="chip">Motion design</span><span class="chip">Design tokens</span><span class="chip">AI-assisted UX</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-hdr"><span class="sec-num">02</span><h2 class="sec-ttl">Experience</h2><div class="sec-line"></div></div>
+  <div class="exp-item">
+    <div class="exp-date">Jun 2025 — Aug 2025</div>
+    <div>
+      <div class="exp-role">UI/UX Design Intern</div>
+      <div class="exp-co">NARL, Tirupati</div>
+      <ul class="exp-ul">
+        <li>Conducted user research and created user personas for internal dashboard users</li>
+        <li>Designed wireframes and high-fidelity prototypes in Figma for a risk &amp; fraud detection dashboard using Kerio Firewall</li>
+        <li>Applied usability principles and accessibility guidelines to improve interface clarity</li>
+        <li>Collaborated directly with developers to ensure accurate design implementation</li>
+      </ul>
+      <button class="cs-btn" onclick="openModal('narl')">Read case study →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--card);">
+  <div class="sec-hdr"><span class="sec-num">03</span><h2 class="sec-ttl">Projects</h2><div class="sec-line"></div></div>
+  <div class="proj-grid">
+
+    <div class="proj-card" onclick="openModal('elearn')">
+      <div class="proj-thumb pt1">E·L</div>
+      <div class="proj-body">
+        <div class="proj-ttl">E-learning Platform UI</div>
+        <div class="proj-desc">End-to-end UX design for a learning platform — user flows, wireframes, and interactive prototypes.</div>
+        <div class="proj-footer">
+          <div class="proj-tags"><span class="ptag pb">UX Research</span><span class="ptag pb">Figma</span></div>
+          <span class="proj-link">Case study ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card" onclick="openModal('cosm')">
+      <div class="proj-thumb pt2">C·E</div>
+      <div class="proj-body">
+        <div class="proj-ttl">Cosmetics E-commerce App</div>
+        <div class="proj-desc">Designed the full user journey from product discovery to checkout, reducing purchase friction.</div>
+        <div class="proj-footer">
+          <div class="proj-tags"><span class="ptag pr">E-commerce UX</span><span class="ptag pr">Figma</span></div>
+          <span class="proj-link">Case study ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card" onclick="openModal('dash')">
+      <div class="proj-thumb pt3">R·D</div>
+      <div class="proj-body">
+        <div class="proj-ttl">Risk &amp; Fraud Detection Dashboard</div>
+        <div class="proj-desc">UI for a security monitoring dashboard — complex network data made scannable for analysts.</div>
+        <div class="proj-footer">
+          <div class="proj-tags"><span class="ptag pg">Dashboard UI</span><span class="ptag pg">Data Viz</span></div>
+          <span class="proj-link">Case study ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card" style="cursor:default;">
+      <div class="proj-thumb pt4">+ +</div>
+      <div class="proj-body">
+        <div class="proj-ttl">More coming soon</div>
+        <div class="proj-desc">New case studies in progress — AI-assisted UX experiments and a mobile health app concept.</div>
+        <div class="proj-footer">
+          <div class="proj-tags"><span class="ptag pp">In progress</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="sec-hdr"><span class="sec-num">04</span><h2 class="sec-ttl">Certifications</h2><div class="sec-line"></div></div>
+  <div class="cert-grid">
+    <a class="cert-card" href="https://drive.google.com/file/d/1W_EhXeLPShSHKqo7bTuiVpqXzPwsz3W6/view?usp=sharing" target="_blank">
+      <div class="cert-ico">🎨</div><div class="cert-nm">UI/UX Design</div><div class="cert-iss">Certified — 2024</div><div class="cert-view">View certificate ↗</div>
+    </a>
+    <a class="cert-card" href="https://drive.google.com/file/d/1-GpjDAnyAd9tZJgQJdsvemWwZqFdicse/view?usp=sharing" target="_blank">
+      <div class="cert-ico">📋</div><div class="cert-nm">Miro UI/UX Mastering</div><div class="cert-iss">Miro — 2024</div><div class="cert-view">View certificate ↗</div>
+    </a>
+    <a class="cert-card" href="https://drive.google.com/file/d/1j-YCQrHhX6wASLqIzX9CN2gncYR2o7-H/view?usp=sharing" target="_blank">
+      <div class="cert-ico">🤖</div><div class="cert-nm">IBM AI Certification</div><div class="cert-iss">IBM — 2024</div><div class="cert-view">View certificate ↗</div>
+    </a>
+    <a class="cert-card" href="https://drive.google.com/file/d/16Lvk9b72uCiAkTU7LY6Fd9E9zxDzDNfK/view?usp=sharing" target="_blank">
+      <div class="cert-ico">💡</div><div class="cert-nm">HP AI Certification</div><div class="cert-iss">HP — 2024</div><div class="cert-view">View certificate ↗</div>
+    </a>
+    <a class="cert-card" href="https://drive.google.com/file/d/1B8CHgo68nTlhd6-eXIKg7w-N7GhBCfJs/view?usp=sharing" target="_blank">
+      <div class="cert-ico">📢</div><div class="cert-nm">HP Digital Marketing</div><div class="cert-iss">HP — 2024</div><div class="cert-view">View certificate ↗</div>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding-top:0;">
+  <div class="contact-wrap">
+    <div class="contact-grid">
+      <div>
+        <div class="ct-title">Let's work<br>together</div>
+        <p class="ct-sub">Open to full-time UI/UX roles, internships, and freelance projects. I reply within 24 hours.</p>
+        <div class="ct-info">
+          <div class="ct-icon">✉</div>
+          <div><div class="ct-lbl">Email</div><div class="ct-val"><a href="mailto:mohankrishnasreenivas@gmail.com">mohankrishnasreenivas@gmail.com</a></div></div>
+        </div>
+        <div class="ct-info">
+          <div class="ct-icon">📞</div>
+          <div><div class="ct-lbl">Phone</div><div class="ct-val"><a href="tel:+919515844607">+91 9515844607</a></div></div>
+        </div>
+        <div class="ct-info">
+          <div class="ct-icon">📍</div>
+          <div><div class="ct-lbl">Location</div><div class="ct-val">Tirupati, Andhra Pradesh</div></div>
+        </div>
+        <div class="ct-social">
+          <a href="https://linkedin.com/in/mohana-krishna" target="_blank" class="soc-btn">LinkedIn ↗</a>
+          <a href="https://behance.net" target="_blank" class="soc-btn">Behance ↗</a>
+          <a href="https://dribbble.com" target="_blank" class="soc-btn">Dribbble ↗</a>
+        </div>
+      </div>
+      <div>
+        <div class="form">
+          <div class="frow">
+            <div class="fg"><label class="fl">Your name</label><input class="fi" type="text" placeholder="Rahul Sharma" id="fn"/></div>
+            <div class="fg"><label class="fl">Your email</label><input class="fi" type="email" placeholder="rahul@company.com" id="fe"/></div>
+          </div>
+          <div class="fg"><label class="fl">Subject</label><input class="fi" type="text" placeholder="UI/UX Designer role at Acme" id="fs"/></div>
+          <div class="fg"><label class="fl">Message</label><textarea class="ft" placeholder="Hi Mohana Krishna, I came across your portfolio and would love to connect..." id="fm"></textarea></div>
+          <button class="fsub" id="fsubBtn" onclick="sendMsg()">
+            <span id="fbtnTxt">Send message →</span>
+          </button>
+          <div class="fok" id="fok">✓ Message sent! I'll get back to you within 24 hours.</div>
+          <div class="ferr" id="ferr">Something went wrong. Please email me directly at mohankrishnasreenivas@gmail.com</div>
+        </div>
+        <p style="font-size:12px;color:rgba(245,242,237,0.3);margin-top:16px;">
+          To activate direct email delivery, follow the EmailJS setup guide below.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Mohana Krishna S</span>
+  <span>UI/UX Designer · Tirupati, Andhra Pradesh</span>
+</footer>
+
+<!-- CASE STUDY MODALS -->
+
+<!-- NARL Internship -->
+<div class="modal-overlay" id="modal-narl" onclick="closeModalOutside(event,'narl')">
+  <div class="modal">
+    <div class="modal-hero pt3">N·A·R·L</div>
+    <button class="modal-close" onclick="closeModal('narl')">✕</button>
+    <div class="modal-body">
+      <div class="modal-tag">Internship · Jun – Aug 2025</div>
+      <div class="modal-ttl">Risk &amp; Fraud Detection Dashboard — NARL</div>
+      <div class="modal-sub">Designing a security monitoring interface for network analysts to detect and respond to threats faster at the National Atmospheric Research Laboratory.</div>
+      <div class="cs-grid">
+        <div class="cs-stat"><div class="cs-stat-n">3</div><div class="cs-stat-l">Months duration</div></div>
+        <div class="cs-stat"><div class="cs-stat-n">5+</div><div class="cs-stat-l">User interviews</div></div>
+        <div class="cs-stat"><div class="cs-stat-n">2</div><div class="cs-stat-l">Prototype iterations</div></div>
+      </div>
+      <div class="cs-section"><h4>Problem</h4><p>Security analysts at NARL were using Kerio Firewall's default interface — dense, data-heavy, and not optimised for rapid threat identification. Critical alerts were buried in noise, causing delayed responses to potential security incidents.</p></div>
+      <div class="cs-section"><h4>My role</h4><ul><li>Conducted 5 user interviews with network security analysts to understand daily workflows and pain points</li><li>Built user personas and mapped the current-state user journey to identify friction points</li><li>Created wireframes in Figma, iterated based on feedback, then delivered high-fidelity prototypes</li><li>Worked directly with the development team to hand off designs and verify implementation</li></ul></div>
+      <div class="cs-section"><h4>Design decisions</h4><ul><li>Introduced a priority-based alert triage system — Critical / Warning / Info — so analysts scan top threats at a glance</li><li>Redesigned the data layout using progressive disclosure: summary view first, details on demand</li><li>Applied WCAG accessibility contrast ratios to all status indicators for low-light environments</li><li>Added a real-time activity timeline to give analysts chronological context for incidents</li></ul></div>
+      <div class="cs-section"><h4>Outcome</h4><p>The prototype was validated with 3 analysts who reported faster threat identification and reduced cognitive load compared to the original interface. The design was handed off to the development team for implementation.</p></div>
+      <div class="cs-actions">
+        <a class="cs-action-btn" href="#contact" onclick="closeModal('narl')">Work with me</a>
+        <button class="cs-action-sec" onclick="closeModal('narl')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- E-learning -->
+<div class="modal-overlay" id="modal-elearn" onclick="closeModalOutside(event,'elearn')">
+  <div class="modal">
+    <div class="modal-hero pt1">E·L</div>
+    <button class="modal-close" onclick="closeModal('elearn')">✕</button>
+    <div class="modal-body">
+      <div class="modal-tag">Project · UI/UX Design</div>
+      <div class="modal-ttl">E-learning Platform UI</div>
+      <div class="modal-sub">End-to-end redesign of a digital learning platform to improve content discoverability, reduce drop-off, and make learning feel less overwhelming.</div>
+      <div class="cs-grid">
+        <div class="cs-stat"><div class="cs-stat-n">3</div><div class="cs-stat-l">User flows mapped</div></div>
+        <div class="cs-stat"><div class="cs-stat-n">12+</div><div class="cs-stat-l">Screens designed</div></div>
+        <div class="cs-stat"><div class="cs-stat-n">2</div><div class="cs-stat-l">Usability rounds</div></div>
+      </div>
+      <div class="cs-section"><h4>Problem</h4><p>Learners struggled to find relevant courses, track their progress, and resume lessons mid-way. The navigation was inconsistent across devices, leading to high drop-off rates before course completion.</p></div>
+      <div class="cs-section"><h4>Process</h4><ul><li>Mapped 3 core user journeys: Course discovery → Enrolment → Learning &amp; completion</li><li>Identified 6 key friction points through heuristic evaluation of the original interface</li><li>Sketched low-fidelity wireframes for each flow, then built interactive Figma prototypes</li><li>Ran 2 rounds of usability testing with 4 participants each and iterated on findings</li></ul></div>
+      <div class="cs-section"><h4>Key design decisions</h4><ul><li>Introduced a persistent progress bar and "Continue learning" shortcut on the dashboard</li><li>Restructured navigation from 9 items to 4 primary categories using card sorting results</li><li>Designed a responsive layout system that works consistently across desktop, tablet, and mobile</li><li>Added micro-copy to guide first-time users through onboarding without a separate tutorial</li></ul></div>
+      <div class="cs-section"><h4>Outcome</h4><p>Usability test participants completed key tasks 40% faster in the redesigned prototype compared to the original. Course discovery time dropped significantly due to the improved search and filter system.</p></div>
+      <div class="cs-actions">
+        <a class="cs-action-btn" href="https://www.figma.com/proto/PWNTlLIQjiiu2WzE8bwAPl/Untitled?node-id=41-121&starting-point-node-id=41%3A121&t=dz9pxVW9aqzhRhv3-1" target="_blank">View Figma prototype ↗</a>
+        <button class="cs-action-sec" onclick="closeModal('elearn')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cosmetics -->
+<div class="modal-overlay" id="modal-cosm" onclick="closeModalOutside(event,'cosm')">
+  <div class="modal">
+    <div class="modal-hero pt2">C·E</div>
+    <button class="modal-close" onclick="closeModal('cosm')">✕</button>
+    <div class="modal-body">
+      <div class="modal-tag">Project · E-commerce UX</div>
+      <div class="modal-ttl">Cosmetics E-commerce App</div>
+      <div class="modal-sub">Designing a mobile shopping experience that helps users discover, evaluate, and purchase cosmetics with confidence — reducing cart abandonment and decision fatigue.</div>
+      <div class="cs-grid">
+        <div class="cs-stat"><div class="cs-stat-n">5</div><div class="cs-stat-l">Screens in checkout flow</div></div>
+        <div class="cs-stat"><div class="cs-stat-n">20+</div><div class="cs-stat-l">UI components</div></div>
+        <div class="cs-stat"><div class="cs-stat-n">3</div><div class="cs-stat-l">Core user journeys</div></div>
+      </div>
+      <div class="cs-section"><h4>Problem</h4><p>Cosmetics shoppers online face two big problems: difficulty evaluating products without physical testing, and a checkout process with too many steps causing drop-off. The goal was to reduce friction across the entire purchase journey.</p></div>
+      <div class="cs-section"><h4>Process</h4><ul><li>Researched competitor apps (Nykaa, Sephora, Purplle) to identify UX patterns and gaps</li><li>Defined 3 primary user journeys: Browse &amp; discover → Product evaluation → Checkout</li><li>Designed a complete component library: product cards, filters, reviews, cart, payment screens</li><li>Iterated on checkout flow to reduce steps from 6 to 3 using progressive disclosure</li></ul></div>
+      <div class="cs-section"><h4>Key design decisions</h4><ul><li>Added shade finder and skin-type filter to help users narrow down products confidently</li><li>Designed a sticky "Add to bag" CTA that follows the user as they scroll product details</li><li>Introduced a visual order summary at checkout so users never feel uncertain about what they're buying</li><li>Built a consistent color system using the brand's warm pink palette across all states and components</li></ul></div>
+      <div class="cs-section"><h4>Outcome</h4><p>The streamlined 3-step checkout and contextual product filters resulted in a significantly cleaner experience validated in prototype testing. The visual design was consistently cited as feeling "premium and trustworthy" by test participants.</p></div>
+      <div class="cs-actions">
+        <a class="cs-action-btn" href="https://www.figma.com/proto/DzDe3BreCYS7aNEUqDU4an/Untitled?node-id=2-2&p=f&t=1ysAIGwwjKkBSZXP-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A5" target="_blank">View Figma prototype ↗</a>
+        <button class="cs-action-sec" onclick="closeModal('cosm')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Risk Dashboard (standalone project) -->
+<div class="modal-overlay" id="modal-dash" onclick="closeModalOutside(event,'dash')">
+  <div class="modal">
+    <div class="modal-hero pt3">R·D</div>
+    <button class="modal-close" onclick="closeModal('dash')">✕</button>
+    <div class="modal-body">
+      <div class="modal-tag">Project · Dashboard UI</div>
+      <div class="modal-ttl">Risk &amp; Fraud Detection Dashboard</div>
+      <div class="modal-sub">A data-dense security monitoring dashboard designed for network analysts to identify threats, track incidents, and take action — built during my internship at NARL.</div>
+      <div class="cs-grid">
+        <div class="cs-stat"><div class="cs-stat-n">8+</div><div class="cs-stat-l">Dashboard views</div></div>
+        <div class="cs-stat"><div class="cs-stat-n">3</div><div class="cs-stat-l">Alert priority tiers</div></div>
+        <div class="cs-stat"><div class="cs-stat-n">WCAG</div><div class="cs-stat-l">AA compliance</div></div>
+      </div>
+      <div class="cs-section"><h4>Challenge</h4><p>Security monitoring tools are notoriously overwhelming. Analysts deal with hundreds of data points simultaneously and need to triage threats in seconds. The existing Kerio Firewall interface wasn't designed for this fast-paced, high-stakes workflow.</p></div>
+      <div class="cs-section"><h4>Solution highlights</h4><ul><li>Priority-tiered alert system: Critical (red) → Warning (amber) → Info (blue) for instant scanning</li><li>Real-time network activity timeline with drill-down capability for incident investigation</li><li>Clean data tables with sortable columns, inline actions, and bulk-select for analyst efficiency</li><li>Dark-mode-ready color palette with high contrast ratios for use in low-light server rooms</li></ul></div>
+      <div class="cs-section"><h4>Tools used</h4><ul><li>Figma — wireframes, component library, high-fidelity prototype</li><li>FigJam — user journey mapping and stakeholder workshops</li><li>Miro — affinity mapping of user research findings</li></ul></div>
+      <div class="cs-actions">
+        <a class="cs-action-btn" href="#contact" onclick="closeModal('dash')">Work with me</a>
+        <button class="cs-action-sec" onclick="closeModal('dash')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ── EmailJS config ──────────────────────────────────────────────────
+  // SETUP INSTRUCTIONS (2 minutes):
+  // 1. Go to https://www.emailjs.com and create a free account
+  // 2. Add Service: Gmail → connect your mohankrishnasreenivas@gmail.com → copy Service ID
+  // 3. Create Template with variables: {{from_name}}, {{from_email}}, {{subject}}, {{message}}
+  //    Set "To Email" in template to: mohankrishnasreenivas@gmail.com
+  //    Copy Template ID
+  // 4. Go to Account → Public Key → copy it
+  // 5. Replace the three values below:
+  const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // ← paste here
+  const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // ← paste here
+  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // ← paste here
+
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  function sendMsg(){
+    var n=document.getElementById('fn').value.trim();
+    var e=document.getElementById('fe').value.trim();
+    var s=document.getElementById('fs').value.trim();
+    var m=document.getElementById('fm').value.trim();
+    if(!n||!e||!m){alert('Please fill in your name, email, and message.');return;}
+    var btn=document.getElementById('fsubBtn');
+    document.getElementById('fbtnTxt').textContent='Sending...';
+    btn.disabled=true;
+    document.getElementById('fok').style.display='none';
+    document.getElementById('ferr').style.display='none';
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      from_name: n,
+      from_email: e,
+      subject: s || 'Portfolio enquiry from '+n,
+      message: m
+    }).then(function(){
+      document.getElementById('fok').style.display='block';
+      document.getElementById('fn').value='';
+      document.getElementById('fe').value='';
+      document.getElementById('fs').value='';
+      document.getElementById('fm').value='';
+      document.getElementById('fbtnTxt').textContent='Send message →';
+      btn.disabled=false;
+    }, function(){
+      document.getElementById('ferr').style.display='block';
+      document.getElementById('fbtnTxt').textContent='Send message →';
+      btn.disabled=false;
+    });
+  }
+
+  // ── Modal logic ─────────────────────────────────────────────────────
+  function openModal(id){
+    document.getElementById('modal-'+id).classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeModal(id){
+    document.getElementById('modal-'+id).classList.remove('open');
+    document.body.style.overflow='';
+  }
+  function closeModalOutside(e,id){
+    if(e.target===document.getElementById('modal-'+id)) closeModal(id);
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      ['narl','elearn','cosm','dash'].forEach(function(id){closeModal(id);});
+    }
+  });
+</script>
+</body>
+</html>
